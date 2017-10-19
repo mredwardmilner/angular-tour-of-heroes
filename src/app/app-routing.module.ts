@@ -1,5 +1,7 @@
 // The Routing Module pulls the routes into a variable. The variable clarifies the routing module pattern in case you export the module in the future.
 
+//Routes tell the router which views to display when a user clicks a link or pastes a URL into the browser.
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
