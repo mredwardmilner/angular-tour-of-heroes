@@ -35,7 +35,30 @@ export class HeroesComponent implements OnInit {
 
     gotoDetail(): void {
         this.router.navigate(['/detail', this.selectedHero.id]); // Pass a two-element link parameters array—a path and the route parameter—to the router navigate() method
-      };
+    };
+
+    // In response to a click event, call the component's click handler and then clear the input field so that it's ready for another name.
+    add(name: string): void {
+        name = name.trim();
+        // When the given name isn't blank, the handler delegates creation of the named hero to the hero service, and then adds the new hero to the array.
+        if (!name) { return; }
+        this.heroService.create(name)
+            .then(hero => {
+                this.heroes.push(hero);
+                this.selectedHero = null;
+            });
+    }
+
+    // Updating the display: it removes the deleted hero from the array and resets the selected hero, if necessary.
+
+    delete(hero: Hero): void {
+        this.heroService
+            .delete(hero.id)
+            .then(() => {
+                this.heroes = this.heroes.filter(h => h !== hero);
+                if (this.selectedHero === hero) { this.selectedHero = null; }
+            });
+    }
 
 }
 

@@ -2,6 +2,16 @@
     background-color: #CFD8DC !important;
     color: white;
   }
+  .delete {
+    float:right;
+    margin-right: .4em;
+    background-color: #ccc;
+    color:white;
+    border-width:0;
+    font-family: sans-serif;
+    border-radius: 3px;
+    font-size: 1.1em;
+  }
   .heroes {
     margin: 0 0 2em 0;
     list-style-type: none;

@@ -20,24 +20,28 @@ export class HeroService {
 
     // A Promise essentially promises to call back when the results are ready. You ask an asynchronous service to call the function with the results or an error.
 
+    // Each Http service method returns an Observable (a stream of events that you can process with array-like operators) of HTTP Response objects. 
+    
+    // The HeroService converts that Observable into a Promise and returns the promise to the caller. 
+
     getHero(id: number): Promise<Hero> {
         const url = `${this.heroesUrl}/${id}`;
         return this.http.get(url)
-          .toPromise()
-          .then(response => response.json().data as Hero) //The data in the response is a single hero object rather than an array.
-          .catch(this.handleError);
+            .toPromise()
+            .then(response => response.json().data as Hero) //The data in the response is a single hero object rather than an array.
+            .catch(this.handleError);
     }; // The data should successfully load from the mock server.
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-    
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+
     update(hero: Hero): Promise<Hero> {
-      const url = `${this.heroesUrl}/${hero.id}`; // Identify which hero via ID
-      return this.http
-        .put(url, JSON.stringify(hero), {headers: this.headers})
-        // The put() body is the JSON string encoding of the hero, obtained by calling JSON.stringify. The body content type (application/json) is identified in the request header.
-        .toPromise()
-        .then(() => hero)
-        .catch(this.handleError);
+        const url = `${this.heroesUrl}/${hero.id}`; // Identify which hero via ID
+        return this.http
+            .put(url, JSON.stringify(hero), { headers: this.headers })
+            // The put() body is the JSON string encoding of the hero, obtained by calling JSON.stringify. The body content type (application/json) is identified in the request header.
+            .toPromise()
+            .then(() => hero)
+            .catch(this.handleError);
     }
 
     getHeroes(): Promise<Hero[]> {
@@ -63,4 +67,22 @@ export class HeroService {
             setTimeout(() => resolve(this.getHeroes()), 2000);
         });
     };
+
+
+    create(name: string): Promise<Hero> {
+        return this.http
+            .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then(res => res.json().data as Hero)
+            .catch(this.handleError);
+    }
+
+// Use the delete() HTTP method to remove the hero from the server:
+    delete(id: number): Promise<void> {
+        const url = `${this.heroesUrl}/${id}`;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
 }
