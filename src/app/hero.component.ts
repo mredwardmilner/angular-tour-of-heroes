@@ -1,6 +1,5 @@
 
-import { Component } from '@angular/core';
-//import { OnInit } from '@angular/core'; // WHY ISN'T THIS IMPORTED?
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -71,7 +70,7 @@ import { HeroService } from './hero.service';
 })
 
 // Use the ngOnInit lifecycle hook to get the hero data when the AppComponent activates.
-export class HeroesComponent implements OnInit { // WHY LEAVE ONINIT ERRORING? 
+export class HeroesComponent implements OnInit {
     heroes: Hero[]; // Define a heroes array property
     selectedHero: Hero; // Is this not an equals because it's not referring to a string or array?
 

@@ -1,4 +1,4 @@
-// Defines AppModule, the root module that tells Angular how to assemble the application. Right now it declares only the AppComponent. Soon there will be more components to declare.
+// Defines AppModule, the root module that tells Angular how to assemble the application. It establishes key facts about the entire app for the Angular compiler.
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +29,12 @@ import { DashboardComponent } from './dashboard.component';
             }, {
                 path: 'heroes', //Path: The router matches this route's path to the URL in the browser address bar (heroes).
                 component: HeroesComponent, // Component: The component that the router should create when navigating to this route (HeroesComponent).
-            }
+            },
+            {
+                path: 'detail/:id', //The colon in the path indicates that :id is a placeholder for a specific hero id when navigating to the HeroDetailComponent
+                // This isn't a fixed path, it's binding to an expression containing a link parameters array. The array has two elements: the path of the destination route and a route parameter set to the value of the current hero's id.
+                component: HeroDetailComponent,
+            },
         ])
     ], // <-- import the FormsModule before binding with [(ngModel)]
     declarations: [AppComponent, HeroesComponent, HeroDetailComponent, DashboardComponent], // In general, the declarations array contains a list of application components, pipes, and directives that belong to the module. A component must be declared in a module before other components can reference it.

@@ -11,13 +11,20 @@ import { HEROES } from './mock-heroes';
 
 export class HeroService {
     // A Promise essentially promises to call back when the results are ready. You ask an asynchronous service to call the function with the results or an error.
+
+    getHero(id: number): Promise<Hero> {
+        return this.getHeroes()
+            .then(heroes => heroes.find(hero => hero.id === id));
+    };
+
     getHeroes(): Promise<Hero[]> {
         return Promise.resolve(HEROES);
     }; // This is called a stub
+
     getHeroesSlowly(): Promise<Hero[]> { // Simulate slow connection
         return new Promise(resolve => {
-          // Simulate server latency with 2 second delay
-          setTimeout(() => resolve(this.getHeroes()), 2000);
+            // Simulate server latency with 2 second delay
+            setTimeout(() => resolve(this.getHeroes()), 2000);
         });
-      };
+    };
 }
