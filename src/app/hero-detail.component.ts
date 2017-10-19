@@ -9,7 +9,8 @@ import 'rxjs/add/operator/switchMap'; // Import the switchMap operator to use la
 
 @Component({ //This @Compenent is what is called a "decorator"
     selector: 'hero-detail', // CSS Selector, the tag name of the element that represents the HeroDetailComponent.
-    templateUrl: './hero-detail.component.html'
+    templateUrl: './hero-detail.component.html',
+    styleUrls: ['./hero-detail.component.css']
 
 })
 
