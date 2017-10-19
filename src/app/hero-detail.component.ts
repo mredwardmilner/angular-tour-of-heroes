@@ -31,6 +31,10 @@ export class HeroDetailComponent implements OnInit {
             .subscribe(hero => this.hero = hero);
         // paramMap Observable to extract the id parameter value from the ActivatedRoute service and use the HeroService to fetch the hero with that id.
     }
+    save(): void {
+        this.heroService.update(this.hero)
+          .then(() => this.goBack());
+      }
     goBack(): void {
         this.location.back();
     }

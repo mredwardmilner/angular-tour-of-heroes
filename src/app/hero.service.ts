@@ -26,9 +26,19 @@ export class HeroService {
           .toPromise()
           .then(response => response.json().data as Hero) //The data in the response is a single hero object rather than an array.
           .catch(this.handleError);
-    };
+    }; // The data should successfully load from the mock server.
 
-    // The data should successfully load from the mock server.
+    private headers = new Headers({'Content-Type': 'application/json'});
+    
+    update(hero: Hero): Promise<Hero> {
+      const url = `${this.heroesUrl}/${hero.id}`; // Identify which hero via ID
+      return this.http
+        .put(url, JSON.stringify(hero), {headers: this.headers})
+        // The put() body is the JSON string encoding of the hero, obtained by calling JSON.stringify. The body content type (application/json) is identified in the request header.
+        .toPromise()
+        .then(() => hero)
+        .catch(this.handleError);
+    }
 
     getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl)
