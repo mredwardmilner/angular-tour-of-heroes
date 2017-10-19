@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'; //This "Compenent" (and "Input
 import { Hero } from './hero';
 
 @Component({ //This @Compenent is what is called a "decorator"
-    selector: 'hero-detail',
+    selector: 'hero-detail', // CSS Selector, the tag name of the element that represents the HeroDetailComponent.
     template: `
     <div *ngIf="hero">
     <h2>{{hero.name}} details</h2>

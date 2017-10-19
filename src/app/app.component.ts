@@ -3,19 +3,25 @@
 // https://angular.io/tutorial/
 
 import { Component } from '@angular/core';
+//import { OnInit } from '@angular/core'; // WHY ISN'T THIS IMPORTED?
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
 
 //The Angular style guide recommends one class per file
 
 
 @Component({
     selector: 'my-app',
-    template: `<h1>{{title}}</h1>
+    template: `
+    <h1>{{title}}</h1>
     <h2>My heroes</h2>
     <ul class="heroes">
-    <li *ngFor="let hero of heroes"  (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}</li>
-    </ul>`,
+      <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+      </li>
+    </ul>
+    <hero-detail [hero]="selectedHero"></hero-detail>
+    `,
     // Can this be in markup instead? Attribute binding?
     // Backticks '`' allow you to do multi-line (key above tab key)
 
@@ -68,30 +74,32 @@ import { Hero } from './hero';
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
     // Why are styles here and not in CSS?
+    providers: [HeroService] //The providers array tells Angular to create a fresh instance of the HeroService when it creates an AppComponent. The AppComponent, as well as its child components, can use that service to get hero data.
 })
 
-export class AppComponent {
+// Use the ngOnInit lifecycle hook to get the hero data when the AppComponent activates.
+export class AppComponent implements OnInit { // WHY LEAVE ONINIT ERRORING? 
     // name = 'Angular';
     title = 'Tour of Heroes';
+    heroes: Hero[];
     selectedHero: Hero; // Is this not an equals because it's not referring to a string or array?
+
+    constructor(private heroService: HeroService) { }; // Constructor that defines a private property
+
+    getHeroes(): void {
+      this.heroService.getHeroes().then(heroes => this.heroes = heroes); // The ES2015 arrow function (=>) in the callback is more succinct than the equivalent function expression and gracefully handles 'this'.
+    };
+
+    ngOnInit(): void { //ngOnInit lifecycle hook. Angular offers interfaces for tapping into critical moments in the component lifecycle: at creation, after each change, and at its eventual destruction.
+      this.getHeroes(); // Run getHeroes above on start
+    };
+
     onSelect(hero: Hero): void { // the selected hero resolves to hero
         this.selectedHero = hero;
     };
-    heroes = HEROES;
 }
 
-const HEROES: Hero[] = [ // All caps is a naming convention for consts
-    { id: 11, name: 'Mr. Nice' },
-    { id: 12, name: 'Narco' },
-    { id: 13, name: 'Bombasto' },
-    { id: 14, name: 'Celeritas' },
-    { id: 15, name: 'Magneta' },
-    { id: 16, name: 'RubberMan' },
-    { id: 17, name: 'Dynama' },
-    { id: 18, name: 'Dr IQ' },
-    { id: 19, name: 'Magma' },
-    { id: 20, name: 'Tornado' }
-];
+
 
