@@ -1,3 +1,5 @@
+// The in-memory web API is only useful in the early stages of development and for demonstrations such as this Tour of Heroes. Don't worry about the details of this backend substitution; you can skip it when you have a real web API server.
+
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {

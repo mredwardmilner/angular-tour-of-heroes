@@ -52,7 +52,7 @@ export class HeroService {
             // The Promise's then() callback, you call the json method of the HTTP Response to extract the data within the response.
             // The response JSON has a single data property, which holds the array of heroes that the caller wants. So you grab that array and return it as the resolved Promise value.
             .catch(this.handleError);
-    }; // This is called a stub
+    }; // This whole block is called a stub
 
     // You must anticipate HTTP failures, as they happen frequently for reasons beyond your control.
     private handleError(error: any): Promise<any> {
@@ -68,7 +68,7 @@ export class HeroService {
         });
     };
 
-
+// Creating a new hero
     create(name: string): Promise<Hero> {
         return this.http
             .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
