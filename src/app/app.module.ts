@@ -15,6 +15,9 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
+import { HeroSearchComponent } from './hero-search.component';
+
+// All these imports are called metadata
 
 @NgModule({
     imports: [ // Import modules to allow access from anywhere in the app
@@ -26,7 +29,7 @@ import { HeroService } from './hero.service';
         // The forRoot() configuration method takes an InMemoryDataService class that primes the in-memory database. 
         AppRoutingModule,
     ],
-    declarations: [AppComponent, HeroesComponent, HeroDetailComponent, DashboardComponent], // In general, the declarations array contains a list of application components, pipes, and directives that belong to the module. A component must be declared in a module before other components can reference it.
+    declarations: [AppComponent, HeroesComponent, HeroDetailComponent, DashboardComponent, HeroSearchComponent], // In general, the declarations array contains a list of application components, pipes, and directives that belong to the module. A component must be declared in a module before other components can reference it.
     providers: [HeroService], //The providers array tells Angular to create a fresh instance of the HeroService when it creates an AppComponent. The AppComponent, as well as its child components, can use that service to get hero data.
     bootstrap: [AppComponent],
 })

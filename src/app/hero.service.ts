@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 // There are many operators like toPromise that extend Observable with useful capabilities. To use those capabilities, you have to add the operators themselves. That's as easy as importing them from the RxJS library like this:
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/toPromise'; //http://reactivex.io/rxjs
 
 import { Hero } from './hero';
 

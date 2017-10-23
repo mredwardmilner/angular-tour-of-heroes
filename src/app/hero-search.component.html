@@ -1,0 +1,12 @@
+<div id="search-component"> <!-- Should this be a <form> or will that not work? -->
+    <h4>Hero Search</h4>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+    <!-- The keyup event binding calls the component's search() method with the new search box value -->
+    <div>
+        <!-- *ngFor can't do anything with an Observable until you route it through the async pipe (AsyncPipe), which subscribes to the Observable and produces the array of heroes to *ngFor -->
+      <div *ngFor="let hero of heroes | async"
+           (click)="gotoDetail(hero)" class="search-result" >
+        {{hero.name}}
+      </div>
+    </div>
+  </div>
